@@ -1,13 +1,18 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
+  def all
+    @trips = Trip.all
+  end
+  
   # GET /trips
   # GET /trips.json
   def index
     if current_user.nil?
       redirect_to root_url, :notice => "Please log in"
     else
-      @trips = current_user.trips
+      @trips_owned = current_user.trips_owned
+      @trips_joined = current_user.trips_joined
     end
   end
 

@@ -1,5 +1,5 @@
 <h1>Trips Owned</h1>
-<% if @trips.empty? %>
+<% if @trips_owned.empty? %>
 	<h3>No trips owned</h3>
 <% else %>
 	<table>
@@ -15,7 +15,7 @@
 	  </thead>
 
 	  <tbody>
-	    <% @trips.each do |trip| %>
+	    <% @trips_owned.each do |trip| %>
 	      <tr>
 	        <td><%= trip.start_date %></td>
 	        <td><%= trip.end_date %></td>
@@ -24,6 +24,34 @@
 	        <td><%= link_to 'Show', trip %></td>
 	        <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
 	        <td><%= link_to 'Delete', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>
+
+<h1>Trips Joined</h1>
+<% if @trips_joined.empty? %>
+	<h3>No trips joined</h3>
+<% else %>
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Start date</th>
+	      <th>End date</th>
+	      <th>City</th>
+	      <th>ID</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @trips.each do |trip| %>
+	      <tr>
+	        <td><%= trip.start_date %></td>
+	        <td><%= trip.end_date %></td>
+	        <td><%= trip.city %></td>
+					<td><%= trip.id %></td>
+	        <td><%= link_to 'Show', trip %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
