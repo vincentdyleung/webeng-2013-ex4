@@ -58,6 +58,7 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1.json
   def update
     params[:trip][:participant_ids] ||= []
+    params[:trip][:poi_ids] ||= []
     respond_to do |format|
       if @trip.update(trip_params)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
@@ -95,6 +96,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:start_date, :end_date, :city, :participant_ids => [])
+      params.require(:trip).permit(:start_date, :end_date, :city, :participant_ids => [], :poi_ids => [])
     end
 end
