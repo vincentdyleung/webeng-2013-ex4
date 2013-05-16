@@ -1,5 +1,10 @@
 class SessionsController < ApplicationController
 	def new
+	  if current_user.nil?
+	    render "new"
+    else
+      redirect_to "/trips"
+    end
 	end
 
   def create

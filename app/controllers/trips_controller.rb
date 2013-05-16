@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-
+  
+  # GET /trips/all
   def all
     @trips = Trip.all
   end
@@ -9,7 +10,7 @@ class TripsController < ApplicationController
   # GET /trips.json
   def index
     if current_user.nil?
-      redirect_to root_url, :notice => "Please log in"
+      redirect_to root_url, :alert => "Please log in"
     else
       @trips_owned = current_user.trips_owned
       @trips_joined = current_user.trips_joined
@@ -29,10 +30,10 @@ class TripsController < ApplicationController
   # GET /trips/1/edit
   def edit
     if current_user.nil?
-      redirect_to root_url, :notice => "Please log in"
+      redirect_to root_url, :alert => "Please log in"
     end
     if !@trip.owner_id.eql?current_user.id
-      redirect_to "/trips", :notice => "You cannot edit trips owned by other people"
+      redirect_to "/trips", :alert => "You cannot edit trips owned by other people"
     end
   end
 
@@ -41,7 +42,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.owner_id = current_user.id
-    @trip.partcipant_ids = [current_user.id]
+    @trip.participants << current_user
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -71,6 +72,14 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    if current_user.nil?
+      redirect_to root_url, :alert => "Please log in"
+      return
+    end
+    if !@trip.owner_id.eql?current_user.id
+      redirect_to "/trips", :alert => "You cannot delete trips owned by other people"
+      return
+    end
     @trip.destroy
     respond_to do |format|
       format.html { redirect_to trips_url }
