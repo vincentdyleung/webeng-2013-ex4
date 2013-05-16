@@ -19,12 +19,19 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
+    if current_user.nil?
+      redirect_to root_url, :notice => "Please log in"
+    end
+    if !@trip.owner_id.eql?current_user.id
+      redirect_to "/trips", :notice => "You cannot edit trips owned by other people"
+    end
   end
 
   # POST /trips
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
+    @trip.owner_id = current_user.id
 
     respond_to do |format|
       if @trip.save

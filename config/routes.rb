@@ -1,5 +1,11 @@
 TripPlanner::Application.routes.draw do
 
+  get "manage_trip/create"
+  get "manage_trip/index"
+  get "manage_trip/show"
+  get "manage_trip/edit"
+  get "trips" => "manage_trip#index"
+  get "trips/all" => "trips#index"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
