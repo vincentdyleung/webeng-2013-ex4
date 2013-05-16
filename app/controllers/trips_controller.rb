@@ -4,7 +4,11 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    if current_user.nil?
+      redirect_to root_url, :notice => "Please log in"
+    else
+      @trips = current_user.trips
+    end
   end
 
   # GET /trips/1
