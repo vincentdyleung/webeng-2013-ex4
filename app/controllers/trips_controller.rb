@@ -41,7 +41,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.owner_id = current_user.id
-
+    @trip.partcipant_ids = [current_user.id]
     respond_to do |format|
       if @trip.save
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
@@ -56,6 +56,7 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
+    params[:trip][:participant_ids] ||= []
     respond_to do |format|
       if @trip.update(trip_params)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
@@ -85,6 +86,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:start_date, :end_date, :city)
+      params.require(:trip).permit(:start_date, :end_date, :city, :participant_ids => [])
     end
 end
