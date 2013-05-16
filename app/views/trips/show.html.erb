@@ -13,7 +13,17 @@
   <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
   <dd><%= @trip.owner_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:participants) %>:</strong></dt>
-  <dd><%= @trip.participant_ids %></dd>
+  <dd>
+		<% @trip.participants.each do |user| %>
+				<%= user.username %>
+			<% end %>
+	</dd>
+	<dt><strong><%= model_class.human_attribute_name(:pois) %>:</strong></dt>
+  <dd>
+		<% @trip.pois.each do |poi| %>
+				<%= poi.name %>
+			<% end %>
+	</dd>
 </dl>
 
 <div class="form-actions">

@@ -20,14 +20,14 @@
 	<div class="control-group">
 		<%= f.label :points_of_interest, :class => 'control-label' %>
 		<div class="controls">
-			<% Poi.all.each do |poi| %>
+			<% Poi.where(:trip_id => nil).order("name ASC").each do |poi| %>
 			<div>
 				<%= check_box_tag "trip[poi_ids][]", poi.id, @trip.pois.include?(poi) %>
 				<%= poi.name %>
 			</div>
 			<% end %>
+			<%= link_to "Create New Point of Interest", new_poi_path, :class => "btn" %>
 		</div>
-		<%= link_to "Create New Point of Interest", new_poi_path, :class => "btn" %>
 	</div>
 	<div class="control-group">
 		<%= f.label :participants, :class => 'control-label' %>
