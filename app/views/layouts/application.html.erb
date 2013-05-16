@@ -44,13 +44,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Trip Planner</a>
+          <%= link_to "Trip Planner", root_url, :class => "brand"%>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+							<% if !current_user.nil? %>
+              <li><%= link_to "Log Out", "/logout"  %></li>
+							<% end %>
+							<li><%= link_to "All Trips", "/trips/all" %></li>
+							<li><%= link_to "My Trips", "/trips" %></li>
+							<li><%= link_to "Users", "/users" %></li>
+							<li><%= link_to "POIs", "/pois" %></li>
             </ul>
+						<% if !current_user.nil? %>
+						<div>	
+							<span>Logged in as <%= current_user.username %>, ID: <%= current_user.id %></span>
+						</div>
+						<% end %>
           </div><!--/.nav-collapse -->
         </div>
       </div>

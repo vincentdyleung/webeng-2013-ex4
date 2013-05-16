@@ -1,6 +1,6 @@
 class PoisController < ApplicationController
   before_action :set_poi, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /pois
   # GET /pois.json
   def index

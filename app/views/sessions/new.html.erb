@@ -9,7 +9,9 @@
     <%= label_tag :password %>
     <%= password_field_tag :password %>
   </div>
-  <div class="actions"><%= submit_tag "Log in" %></div>
-  <%= link_to "Sign up", "/signup" %>
-  <%= link_to "Log out", "/logout" %>
+  <div class="actions">
+		<%= submit_tag "Log in", :class => "btn btn-primary" %>
+		<%= link_to "Sign up", "/signup", :class => "btn"%>
+	</div>
+  
 <% end %>
