@@ -24,9 +24,10 @@
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
         <td><%= trip.city %></td>
-        <td><%= trip.owner_id %></td>
+        <td><%= trip.owner.username %></td>
         <td><%=l trip.created_at %></td>
         <td>
+					<%= link_to "Vote", "#", :class => "btn btn-mini btn-primary"%>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_trip_path(trip), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -70,16 +71,11 @@
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
         <td><%= trip.city %></td>
-        <td><%= trip.owner_id %></td>
+        <td><%= trip.owner.username %></td>
         <td><%=l trip.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_trip_path(trip), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      trip_path(trip),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <%= link_to "Vote", "#", :class => "btn btn-mini btn-primary"%>
+					<%= link_to "Details", trip_path(trip), :class => "btn btn-mini btn-info"%>
         </td>
       </tr>
     <% end %>
