@@ -1,9 +1,17 @@
 TripPlanner::Application.routes.draw do
+  
+  get "vote/add/:id" => "vote#add"
+  get "vote/remove/:id" => "vote#remove"
+  get "vote/:trip_id" => "vote#show"
   get "trips/all" => "trips#all"
+  get "trips/decide/:id" => "trips#decide"
+  get "pois/mark/:id" => "pois#mark"
+  get "pois/unmark/:id" => "pois#unmark"
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
   root :to => "sessions#new"
+  resources :vote
   resources :users
   resources :sessions
 

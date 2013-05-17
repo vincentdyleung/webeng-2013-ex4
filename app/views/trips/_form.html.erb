@@ -18,9 +18,9 @@
     </div>
   </div>
 	<div class="control-group">
-		<%= f.label :points_of_interest, :class => 'control-label' %>
+		<%= f.label :add_new_points_of_interest, :class => 'control-label' %>
 		<div class="controls">
-			<% Poi.where(:trip_id => nil).order("name ASC").each do |poi| %>
+			<% Poi.where("trip_id is null OR trip_id = ?", @trip.id).order("name ASC").each do |poi| %>
 			<div>
 				<%= check_box_tag "trip[poi_ids][]", poi.id, @trip.pois.include?(poi) %>
 				<%= poi.name %>
