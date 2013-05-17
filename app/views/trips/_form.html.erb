@@ -1,0 +1,49 @@
+<%= form_for @trip, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :start_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :start_date, :class => 'select_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :end_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :end_date, :class => 'select_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'text_field' %>
+    </div>
+  </div>
+	<div class="control-group">
+		<%= f.label :points_of_interest, :class => 'control-label' %>
+		<div class="controls">
+			<% Poi.where(:trip_id => nil).order("name ASC").each do |poi| %>
+			<div>
+				<%= check_box_tag "trip[poi_ids][]", poi.id, @trip.pois.include?(poi) %>
+				<%= poi.name %>
+			</div>
+			<% end %>
+			<%= link_to "Create New Point of Interest", new_poi_path, :class => "btn" %>
+		</div>
+	</div>
+	<div class="control-group">
+		<%= f.label :participants, :class => 'control-label' %>
+		<div class="controls">
+			<% User.all.each do |user| %>
+			<div>
+				<%= check_box_tag "trip[participant_ids][]", user.id, @trip.participants.include?(user) %>
+				<%= user.username %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                trips_path, :class => 'btn' %>
+  </div>
+<% end %>
