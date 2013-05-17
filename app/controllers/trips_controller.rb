@@ -1,6 +1,10 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   
+  def decide
+    @trip = Trip.find(params[:id])
+  end
+  
   # GET /trips/all
   def all
     @trips = Trip.all

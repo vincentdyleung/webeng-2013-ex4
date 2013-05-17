@@ -1,0 +1,24 @@
+<h1>Decide Points of Interest</h1>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Points of Interest</th>
+			<th>Votes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @trip.pois.each do |poi| %>
+		<tr>
+			<td><%= poi.name %></td>
+			<td><%= Vote.find_all_by_poi_id(poi.id).count %></td>
+			<td>
+			<% if !poi.definitive %>
+				<button id=<%= poi.id %> class="btn btn-mini btn-primary mark">Mark</button>
+			<% else %>
+				<button id=<%= poi.id %> class="btn btn-mini btn-success mark disabled">Marked</button>
+			<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
