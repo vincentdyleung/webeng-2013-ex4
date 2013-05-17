@@ -26,7 +26,8 @@
 				<%= poi.name %>
 			</div>
 			<% end %>
-			<%= link_to "Create New Point of Interest", new_poi_path, :class => "btn" %>
+			<%= link_to "Create New Point of Interest", new_poi_path, 
+								:data => { :confirm => "Current trip will not be saved. Continue?" }, :class => "btn" %>
 		</div>
 	</div>
 	<div class="control-group">
