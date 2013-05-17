@@ -1,6 +1,31 @@
 class PoisController < ApplicationController
   before_action :set_poi, only: [:show, :edit, :update, :destroy]
   
+  def mark
+    @poi = Poi.find(params[:id])
+    if !@poi.nil?
+      @poi.definitive = true
+      if @poi.save
+        render :text => "success"
+        return
+      end
+    end
+    render :text => "failure"
+  end
+  
+  def unmark
+    @poi = Poi.find(params[:id])
+    if !@poi.nil?
+      @poi.definitive = false
+      if @poi.save
+        render :text => "success"
+        return
+      end
+    end
+    render :text => "failure"
+  end
+  
+  
   # GET /pois
   # GET /pois.json
   def index
