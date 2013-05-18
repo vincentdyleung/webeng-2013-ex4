@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130517161814) do
+ActiveRecord::Schema.define(version: 20130518003402) do
 
   create_table "pois", force: true do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20130517161814) do
     t.datetime "updated_at"
     t.integer  "trip_id"
     t.boolean  "definitive",  default: false
+    t.string   "image_url"
   end
 
   create_table "trips", force: true do |t|
