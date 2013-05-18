@@ -17,6 +17,10 @@
       <%= f.text_field :description, :class => 'text_field' %>
     </div>
   </div>
+	<div class="control-group">
+		<%= f.label :image, :class => "control-label" %>
+		<%= link_to "Attach Image", image_path(@poi.id), :class => "btn btn-info" %>
+	</div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

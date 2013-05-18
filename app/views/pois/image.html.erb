@@ -1,0 +1,18 @@
+<h1>Choose Image for <%= @poi.name %></h1>
+<%= form_tag image_path(@poi.id) do %>
+	<div class="field">
+		<%= label_tag :search_on_flickr %>
+		<%= text_field_tag :keyword, params[:keyword] %>
+	</div>
+	<div class="action">
+		<%= submit_tag "Search", :class => "btn btn-primary"%>
+	</div>
+	<% if !@thumbnail_urls.nil? && !@thumbnail_urls.empty? %>
+	<h3>Search Results</h3>
+	<div id="results">
+		<% @thumbnail_urls.each do |url| %>
+		<%= image_tag url %>
+		<% end %>
+	</div>
+	<% end %>
+<% end %>
