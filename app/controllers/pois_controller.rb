@@ -25,6 +25,20 @@ class PoisController < ApplicationController
     render :text => "failure"
   end
   
+  def image
+    @poi = Poi.find(params[:id])
+  end
+  
+  def search_image
+    @poi = Poi.find(params[:id])
+    # search for 5 photos
+    photos = flickr.photos.search(:text => params[:keyword], :per_page => 5)
+    @thumbnail_urls = []
+    photos.each do |photo|
+      @thumbnail_urls << FlickRaw.url_q(flickr.photos.getInfo :photo_id => photo.id, :secret => photo.secret)
+    end
+    render "image"
+  end
   
   # GET /pois
   # GET /pois.json
@@ -94,6 +108,6 @@ class PoisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poi_params
-      params.require(:poi).permit(:name, :location, :description, :vote)
+      params.require(:poi).permit(:name, :location, :description, :vote, :image_url)
     end
 end
