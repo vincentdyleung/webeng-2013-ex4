@@ -19,7 +19,15 @@
   </div>
 	<div class="control-group">
 		<%= f.label :image, :class => "control-label" %>
-		<%= link_to "Attach Image", image_path(@poi.id), :class => "btn btn-info" %>
+		<% if !@poi.image_url.nil? %>
+			<%= image_tag @poi.image_url %>
+			<%= f.text_field :image_url, :class => "text_field hidden", :value => @poi.image_url %>
+		<% end %>
+		<% if !params[:image_url].nil? %>
+			<%= image_tag params[:image_url] %>
+			<%= f.text_field :image_url, :class => "text_field hidden", :value => params[:image_url] %>
+		<% end %>
+		<%= link_to "Choose Image", image_path(@poi.id), :class => "btn btn-info" %>
 	</div>
 
   <div class="form-actions">

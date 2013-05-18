@@ -11,7 +11,7 @@
 	<h3>Search Results</h3>
 	<div id="results">
 		<% @thumbnail_urls.each do |url| %>
-		<%= image_tag url %>
+		<%= link_to image_tag(url), edit_poi_path + "?image_url=" + url %>
 		<% end %>
 	</div>
 	<% end %>
