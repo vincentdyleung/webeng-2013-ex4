@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	$("button.mark").click(function() {
+	$("button.confirm").click(function() {
 		var button = $(this)
-		var mark_url = "/pois/mark/" + button.attr("id");
-		var unmark_url = "/pois/unmark/" + button.attr("id");
+		var mark_url = "/pois/" + button.attr("id") + "/mark";
+		var unmark_url = "/pois/" + button.attr("id") + "/unmark";
 		if (!button.hasClass("disabled")) {
 			$.ajax({
 				url: mark_url,
@@ -10,7 +10,8 @@ $(document).ready(function() {
 					if (data == "success") {
 						button.removeClass("btn-primary");
 						button.addClass("btn-success disabled");
-						button.html("Marked")
+						button.html("Confirmed");
+						button.next().removeClass("hidden")
 					}
 				}
 			});
@@ -21,7 +22,8 @@ $(document).ready(function() {
 					if (data == "success") {
 						button.removeClass("btn-success disabled");
 						button.addClass("btn-primary");
-						button.html("Mark");
+						button.html("Confirm");
+						button.next().addClass("hidden")
 					}
 				}
 			})

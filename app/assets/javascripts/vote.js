@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	$("button.vote").click(function() {
 		var button = $(this)
-		var add_url = "/vote/add/" + button.attr("id");
-		var remove_url = "/vote/remove/" + button.attr("id");
+		var add_url = "/vote/" + button.attr("id") + "/add";
+		var remove_url = "/vote/" + button.attr("id") + "/remove";
 		if (!button.hasClass("disabled")) {
 			$.ajax({
 				url: add_url,

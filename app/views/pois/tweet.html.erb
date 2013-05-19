@@ -1,0 +1,10 @@
+<h1>Send a Tweet for <%= @poi.name %></h1>
+<%= form_tag tweet_path(@poi.id) do %>
+	<div class="field">
+		<%= label_tag :your_tweet %>
+		<%= text_area_tag :tweet, "Point of Interest #{@poi.name} confirmed in trip to #{@poi.trip.city} #webeng2013ex4", :size => "30x5" %>
+	</div>
+	<div class="action">
+		<%= submit_tag "Send Tweet", :class => "btn btn-primary"%>
+	</div>
+<% end %>
