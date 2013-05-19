@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
   
   def twitter_auth
-    debugger
    begin 
       @access_token = twitter_client.authorize(
         session[:request_token],
