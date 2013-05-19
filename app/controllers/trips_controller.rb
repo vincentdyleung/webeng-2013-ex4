@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   
-  def decide
+  def confirm
     @trip = Trip.find(params[:id])
   end
   

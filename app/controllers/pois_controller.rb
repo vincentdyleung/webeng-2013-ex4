@@ -40,6 +40,15 @@ class PoisController < ApplicationController
     render "image"
   end
   
+  def tweet
+    @poi = Poi.find(params[:id])
+  end
+  
+  def send_tweet
+    twitter_client.update(params[:tweet])
+    redirect_to root_url, :notice => "Your Tweet has been sent"
+  end
+  
   # GET /pois
   # GET /pois.json
   def index
