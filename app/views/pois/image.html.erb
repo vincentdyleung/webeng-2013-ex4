@@ -7,11 +7,14 @@
 	<div class="action">
 		<%= submit_tag "Search", :class => "btn btn-primary"%>
 	</div>
-	<% if !@thumbnail_urls.nil? && !@thumbnail_urls.empty? %>
+	<% if !@flickr_photo_ids.nil? && !@flickr_photo_ids.empty? %>
 	<h3>Search Results</h3>
 	<div id="results">
-		<% @thumbnail_urls.each do |url| %>
-		<%= link_to image_tag(url), edit_poi_path + "?image_url=" + url %>
+		<% @flickr_photo_ids.each do |id| %>
+			<% info = flickr.photos.getInfo(:photo_id => id) 
+					image_url = FlickRaw.url_q(info)
+					page_url = FlickRaw.url_photopage(info) %>
+			<%= link_to image_tag(image_url), edit_poi_path + "?image_url=" + image_url + "&page_url=" + page_url %>
 		<% end %>
 	</div>
 	<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130518003402) do
+ActiveRecord::Schema.define(version: 20130520190455) do
 
   create_table "pois", force: true do |t|
     t.string   "name"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20130518003402) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "trip_id"
-    t.boolean  "definitive",  default: false
+    t.boolean  "definitive",     default: false
     t.string   "image_url"
+    t.string   "photo_page_url"
   end
 
   create_table "trips", force: true do |t|
@@ -45,6 +46,8 @@ ActiveRecord::Schema.define(version: 20130518003402) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
+    t.string   "secret"
   end
 
   create_table "votes", force: true do |t|
