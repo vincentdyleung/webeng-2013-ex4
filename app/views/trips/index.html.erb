@@ -27,6 +27,7 @@
         <td><%= trip.owner.username %></td>
         <td><%=l trip.created_at %></td>
         <td>
+					<%= link_to "Details", trip_path(trip), :class => "btn btn-mini btn-info"%>
 					<%= link_to "Vote", vote_path(trip.id), :class => "btn btn-mini btn-primary"%>
 					<%= link_to "Confirm POI", confirm_path(trip.id), :class => "btn btn-mini btn-inverse"%>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -43,7 +44,7 @@
 </table>
 <% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to "Create Trip",
             new_trip_path,
             :class => 'btn btn-primary' %>
 

@@ -11,19 +11,29 @@
   <dt><strong><%= model_class.human_attribute_name(:city) %>:</strong></dt>
   <dd><%= @trip.city %></dd>
   <dt><strong><%= model_class.human_attribute_name(:owner_id) %>:</strong></dt>
-  <dd><%= @trip.owner_id %></dd>
+  <dd><%= @trip.owner.username %></dd>
   <dt><strong><%= model_class.human_attribute_name(:participants) %>:</strong></dt>
   <dd>
-		<% @trip.participants.each do |user| %>
-				<%= user.username %>
+		<table>
+			<% @trip.participants.each do |user| %>
+				<tr><td><%= user.username %></tr></td>
 			<% end %>
+		</table>
 	</dd>
 	<dt><strong><%= model_class.human_attribute_name(:pois) %>:</strong></dt>
   <dd>
-		<% @trip.pois.each do |poi| %>
-				<%= poi.name %>
-				<%= poi.definitive %>
-		<% end %>
+		<table>
+			<% @trip.pois.each do |poi| %>
+				<tr>
+					<td><%= link_to poi.name, poi_path(poi.id) %></td>
+					<td>
+						<% if poi.definitive %>
+							<span class="btn btn-success btn-mini disabled">Confirmed</span>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
 	</dd>
 </dl>
 

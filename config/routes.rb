@@ -26,7 +26,7 @@ TripPlanner::Application.routes.draw do
   get "user/:id" => "users#show", :as => "user"
   root :to => "sessions#new"
   
-  resources :vote
+  get "vote/:id" => "vote#show", :as => "vote_path"
   
   resources :sessions
 
