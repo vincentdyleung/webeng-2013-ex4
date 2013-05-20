@@ -19,6 +19,7 @@
   </div>
 	<div class="control-group">
 		<%= f.label :image, :class => "control-label" %>
+		<%= f.text_field :photo_page_url, :class => "text_field hidden", :value => params[:page_url] %>
 		<% if !params[:image_url].nil? %>
 			<%= image_tag params[:image_url] %>
 			<%= f.text_field :image_url, :class => "text_field hidden", :value => params[:image_url] %>
