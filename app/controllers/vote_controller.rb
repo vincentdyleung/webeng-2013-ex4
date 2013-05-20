@@ -22,6 +22,9 @@ class VoteController < ApplicationController
   
   def show
     @trip = Trip.find(params[:trip_id])
+    if !@trip.participants.include?current_user
+      redirect_to root_url, :alert => "Only participants can vote"
+    end
     @pois = @trip.pois
   end
   

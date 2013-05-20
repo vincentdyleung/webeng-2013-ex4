@@ -1,5 +1,6 @@
 class PoisController < ApplicationController
   before_action :set_poi, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_user
   
   def mark
     @poi = Poi.find(params[:id])

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_filter :verify_user
+  skip_before_filter :verify_user, :only => [:new, :create]
   def twitter_connect
     request_token = twitter_client.request_token(:oauth_callback => auth_url)
     session[:request_token] = request_token.token

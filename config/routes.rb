@@ -22,11 +22,11 @@ TripPlanner::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
   
-  get "users" => "users#index", :as => "users"
-  get "user/:id" => "users#show", :as => "user"
   root :to => "sessions#new"
   
   get "vote/:id" => "vote#show", :as => "vote_path"
+  
+  resources :users
   
   resources :sessions
 

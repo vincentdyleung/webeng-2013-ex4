@@ -27,5 +27,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  helper_method :current_user, :twitter_client
+  def verify_user
+    if current_user.nil?
+      redirect_to root_url, :alert => "Please log in"
+    end
+  end
+  
+  helper_method :current_user, :twitter_client, :verify_user
 end
