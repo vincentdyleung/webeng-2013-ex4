@@ -12,7 +12,7 @@
   <dd><%= @poi.description %></dd>
 	<dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
   <dd><%= image_tag @poi.image_url %></dd>
-	<dd><%= link_to "View on Flickr", @poi.photo_page_url %></dd>
+	<dd><%= link_to "View on Flickr", @poi.photo_page_url, :target => "_blank"%></dd>
   <dt><strong><%= model_class.human_attribute_name(:trip_id) %>:</strong></dt>
   <dd><%= @poi.trip_id %></dd>
 </dl>
