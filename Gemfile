@@ -48,6 +48,11 @@ gem 'less-rails'
 # flickr image for POIs
 gem 'flickraw'
 
+# twitter OAuth
+gem 'twitter_oauth'
+
+gem 'debugger'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,6 +1,43 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def twitter_connect
+    request_token = twitter_client.request_token(:oauth_callback => auth_url)
+    session[:request_token] = request_token.token
+    session[:request_token_secret] = request_token.secret
+    redirect_to request_token.authorize_url
+  end
+  
+  def twitter_auth
+   begin 
+      @access_token = twitter_client.authorize(
+        session[:request_token],
+        session[:request_token_secret],
+        :oauth_verifier => params[:oauth_verifier]
+      )
+    rescue OAuth::Unauthorized
+      session[:request_token] = nil
+      session[:request_token_secret] = nil
+      redirect_to twitter_path
+    end
+    
+    if twitter_client.authorized?
+      current_user.token = @access_token.token
+      current_user.secret = @access_token.secret
+      current_user.save
+      redirect_to root_url
+    end
+  end
+  
+  def twitter_disconnect
+    session[:request_token] = nil
+    session[:request_token_secret] = nil
+    current_user.token = nil
+    current_user.secret = nil
+    current_user.save
+    redirect_to root_url
+  end
+  
   # GET /users
   def index
     @users = User.all
@@ -53,6 +90,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :token, :secret)
     end
 end

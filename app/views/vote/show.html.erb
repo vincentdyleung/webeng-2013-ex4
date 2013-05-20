@@ -11,9 +11,9 @@
 				<td><%= poi.name %></td>
 				<td>
 				<% if Vote.find_by_poi_id_and_user_id(poi.id, current_user.id).nil? %>
-					<button id=<%= poi.id %> class="btn btn-mini btn-primary vote">Vote</button>
+					<%= button_tag "Vote", :id => poi.id, :class => "btn btn-primary vote" %>
 				<% else %>
-					<button id=<%= poi.id %> class="btn btn-mini btn-success vote disabled">Voted</button>
+					<%= button_tag "Voted", :id => poi.id, :class => "btn btn-success vote disabled" %>
 				<% end %>
 			</tr>
 		<% end %>

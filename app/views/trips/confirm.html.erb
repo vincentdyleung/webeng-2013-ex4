@@ -13,10 +13,14 @@
 			<td><%= Vote.find_all_by_poi_id(poi.id).count %></td>
 			<td>
 			<% if !poi.definitive %>
-				<button id=<%= poi.id %> class="btn btn-mini btn-primary mark">Mark</button>
+				<%= button_tag "Confirm", :id => poi.id, :class => "btn btn-primary confirm" %>
+				<%= link_to "Tweet", tweet_path(poi.id), :class => "btn tweet hidden" %>
 			<% else %>
-				<button id=<%= poi.id %> class="btn btn-mini btn-success mark disabled">Marked</button>
+				<%= button_tag "Confirmed", :id => poi.id, :class => "btn btn-success confirm disabled" %>
+				<%= link_to "Tweet", tweet_path(poi.id), :class => "btn tweet" %>
 			<% end %>
+			</td>
+			<td>
 			</td>
 		</tr>
 		<% end %>

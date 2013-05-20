@@ -28,7 +28,7 @@
         <td><%=l trip.created_at %></td>
         <td>
 					<%= link_to "Vote", vote_path(trip.id), :class => "btn btn-mini btn-primary"%>
-					<%= link_to "Decide POI", "/trips/decide/" + trip.id.to_s, :class => "btn btn-mini btn-inverse"%>
+					<%= link_to "Confirm POI", confirm_path(trip.id), :class => "btn btn-mini btn-inverse"%>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_trip_path(trip), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

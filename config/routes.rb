@@ -1,20 +1,33 @@
 TripPlanner::Application.routes.draw do
   
-  get "vote/add/:id" => "vote#add", :as => "add__vote"
-  get "vote/remove/:id" => "vote#remove", :as => "removevote"
+  get "vote/:id/add" => "vote#add", :as => "add_vote"
+  get "vote/:id/remove" => "vote#remove", :as => "remove_vote"
   get "vote/:trip_id" => "vote#show", :as => "vote"
+  
   get "trips/all" => "trips#all"
-  get "trips/decide/:id" => "trips#decide", :as => "decide"
-  get "pois/mark/:id" => "pois#mark", :as => "mark"
-  get "pois/unmark/:id" => "pois#unmark", :as => "unmark"
+  get "trips/:id/confirm" => "trips#confirm", :as => "confirm"
+  
+  get "pois/:id/mark" => "pois#mark", :as => "mark"
+  get "pois/:id/unmark" => "pois#unmark", :as => "unmark"
   get "pois/:id/image" => "pois#image", :as => "image"
   post "pois/:id/image" => "pois#search_image"
+  get "pois/:id/tweet" => "pois#tweet", :as => "tweet"
+  post "pois/:id/tweet" => "pois#send_tweet", :as => "send_tweet"
+  
+  get "twitter" => "users#twitter_connect", :as => "twitter"
+  get "auth" => "users#twitter_auth", :as => "auth"
+  get "disconnect" => "users#twitter_disconnect", :as => "disconnect"
+  
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
+  
+  get "users" => "users#index", :as => "users"
+  get "user/:id" => "users#show", :as => "user"
   root :to => "sessions#new"
+  
   resources :vote
-  resources :users
+  
   resources :sessions
 
   resources :pois
