@@ -48,6 +48,8 @@ gem 'less-rails'
 # flickr image for POIs
 gem 'flickraw'
 
+gem 'debugger'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
