@@ -9,8 +9,8 @@ TripPlanner::Application.routes.draw do
   
   get "pois/:id/mark" => "pois#mark", :as => "mark"
   get "pois/:id/unmark" => "pois#unmark", :as => "unmark"
-  get "pois/:id/image" => "pois#image", :as => "image"
-  post "pois/:id/image" => "pois#search_image"
+  get "pois/image" => "pois#image", :as => "image"
+  post "pois/image" => "pois#search_image"
   get "pois/:id/tweet" => "pois#tweet", :as => "tweet"
   post "pois/:id/tweet" => "pois#send_tweet", :as => "send_tweet"
   
@@ -22,11 +22,11 @@ TripPlanner::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
   
-  get "users" => "users#index", :as => "users"
-  get "user/:id" => "users#show", :as => "user"
   root :to => "sessions#new"
   
-  resources :vote
+  get "vote/:id" => "vote#show", :as => "vote_path"
+  
+  resources :users
   
   resources :sessions
 

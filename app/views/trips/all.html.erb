@@ -21,7 +21,7 @@
         <td><%= trip.start_date %></td>
         <td><%= trip.end_date %></td>
         <td><%= trip.city %></td>
-        <td><%= trip.owner_id %></td>
+        <td><%= trip.owner.username %></td>
         <td><%=l trip.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

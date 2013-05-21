@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_filter :verify_user
+  skip_before_filter :verify_user, :only => [:new, :create]
   def twitter_connect
     request_token = twitter_client.request_token(:oauth_callback => auth_url)
     session[:request_token] = request_token.token
@@ -59,11 +60,10 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(user_params)
-
     if @user.save
       redirect_to root_path, notice: 'Signed up!'
     else
-      render action: 'new'
+      render 'new'
     end
   end
 

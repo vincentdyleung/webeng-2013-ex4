@@ -1,4 +1,12 @@
 <%= form_for @poi, :html => { :class => 'form-horizontal' } do |f| %>
+	<% if @poi.errors.any? %>
+		<% for message in @poi.errors.full_messages %>
+			<div class="alert alert-error fade in">
+				<button class="close" data-dismiss="alert">x</button>
+				<%= message %>
+			</div>
+		<% end %>
+	<% end %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
@@ -27,11 +35,11 @@
 			<%= image_tag @poi.image_url %>
 			<%= f.text_field :image_url, :class => "text_field hidden", :value => @poi.image_url %>
 		<% end %>
-		<%= link_to "Choose Image", image_path(@poi.id), :class => "btn btn-info" %>
+		<%= link_to "Choose Image", image_path + "?callback=" + request.url, :class => "btn btn-info" %>
 	</div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit "Update Point of Interest", :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 pois_path, :class => 'btn' %>
   </div>
