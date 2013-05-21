@@ -48,13 +48,10 @@
           <div class="container-fluid nav-collapse">
             <ul class="nav">
 							<% if !current_user.nil? %>
-              <li><%= link_to "Log Out", "/logout"  %></li>
-							<% end %>
-							<li><%= link_to "All Trips", trips_all_path %></li>
-							<li><%= link_to "My Trips", trips_path %></li>
-							<li><%= link_to "Users", users_path %></li>
-							<li><%= link_to "POIs", pois_path %></li>
-							<% if !current_user.nil? %>
+								<li><%= link_to "All Trips", trips_all_path %></li>
+								<li><%= link_to "My Trips", trips_path %></li>
+								<li><%= link_to "Users", users_path %></li>
+								<li><%= link_to "POIs", pois_path %></li>
 								<li>
 									<% if current_user.token.nil? || current_user.secret.nil? %>
 										<%= link_to "Connect with Twitter", twitter_path %>
@@ -62,11 +59,22 @@
 										<%= link_to "Disconnect from Twitter", disconnect_path %>
 									<% end %>
 								</li>
-								<li>
-									<%= link_to current_user.username, user_path(current_user.id) %>
+							</ul>
+							<ul class="nav pull-right">
+								<li class="dropdown">
+									<%= link_to "#", :class => "dropdown-toggle", :'data-toggle' => "dropdown" do %>
+										<%= current_user.username %>
+										<b class="caret"></b>
+									<% end %>
+									<ul class="dropdown-menu">
+										<li><%= link_to "Log Out", logout_path  %></li>
+									</ul>
 								</li>
+							</ul>
+							<% else %>
+								</ul>
 							<% end %>
-            </ul>
+						
           </div><!--/.nav-collapse -->
         </div>
       </div>
