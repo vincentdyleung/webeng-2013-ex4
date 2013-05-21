@@ -23,7 +23,7 @@
 	<dt><strong>Points of Interest:</strong></dt>
   <dd>
 		<table>
-			<% @trip.pois.each do |poi| %>
+			<% @trip.pois.sort.reverse.each do |poi| %>
 				<tr>
 					<td><%= link_to poi.name, poi_path(poi.id) %></td>
 					<td>
@@ -31,6 +31,8 @@
 							<span class="btn btn-success btn-mini disabled">Confirmed</span>
 						<% end %>
 					</td>
+					<td>
+						Votes: <%= Vote.find_all_by_poi_id(poi.id).count %>
 				</tr>
 			<% end %>
 		</table>

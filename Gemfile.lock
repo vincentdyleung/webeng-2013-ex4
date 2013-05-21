@@ -44,7 +44,6 @@ GEM
       debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.2)
-    dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -143,7 +142,6 @@ DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 4.0.0)
   debugger
-  dynamic_form
   flickraw
   jbuilder (~> 1.0.1)
   jquery-rails
