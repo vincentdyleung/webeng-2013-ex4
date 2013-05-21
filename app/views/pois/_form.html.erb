@@ -27,7 +27,7 @@
 			<%= image_tag @poi.image_url %>
 			<%= f.text_field :image_url, :class => "text_field hidden", :value => @poi.image_url %>
 		<% end %>
-		<%= link_to "Choose Image", image_path(@poi.id), :class => "btn btn-info" %>
+		<%= link_to "Choose Image", image_path + "?callback=" + request.url, :class => "btn btn-info" %>
 	</div>
 
   <div class="form-actions">

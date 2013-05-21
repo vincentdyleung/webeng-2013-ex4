@@ -9,8 +9,8 @@ TripPlanner::Application.routes.draw do
   
   get "pois/:id/mark" => "pois#mark", :as => "mark"
   get "pois/:id/unmark" => "pois#unmark", :as => "unmark"
-  get "pois/:id/image" => "pois#image", :as => "image"
-  post "pois/:id/image" => "pois#search_image"
+  get "pois/image" => "pois#image", :as => "image"
+  post "pois/image" => "pois#search_image"
   get "pois/:id/tweet" => "pois#tweet", :as => "tweet"
   post "pois/:id/tweet" => "pois#send_tweet", :as => "send_tweet"
   

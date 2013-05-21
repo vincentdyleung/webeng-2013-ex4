@@ -27,14 +27,12 @@ class PoisController < ApplicationController
   end
   
   def image
-    @poi = Poi.find(params[:id])
     if !params[:keyword].nil?
       search_image
     end
   end
   
   def search_image
-    @poi = Poi.find(params[:id])
     # search for 5 photos
     photos = flickr.photos.search(:text => params[:keyword], :per_page => 5, :page => params[:page])
     @flickr_photo_ids = []
