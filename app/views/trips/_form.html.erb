@@ -1,4 +1,12 @@
 <%= form_for @trip, :html => { :class => 'form-horizontal' } do |f| %>
+	<% if @trip.errors.any? %>
+		<% for message in @trip.errors.full_messages %>
+			<div class="alert alert-error fade in">
+				<button class="close" data-dismiss="alert">x</button>
+				<%= message %>
+			</div>
+		<% end %>
+	<% end %>
   <div class="control-group">
     <%= f.label :start_date, :class => 'control-label' %>
     <div class="controls">

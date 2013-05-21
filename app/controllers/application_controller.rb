@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   FlickRaw.api_key = "b50cb361d7475defe8c39f323c03a869"
   FlickRaw.shared_secret = "e0f721be3df6d1ef"
   
+  ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+    if html_tag =~ /\<label/
+      html_tag
+    else
+      errors = Array(instance.error_message).join(',')
+      %(#{html_tag}<span class="validation-error">&nbsp;#{errors}</span>).html_safe
+    end
+  end
+  
   private
   def current_user
   	@current_user ||= User.find(session[:user_id]) if session[:user_id]
