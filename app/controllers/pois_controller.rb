@@ -1,5 +1,6 @@
 class PoisController < ApplicationController
   before_action :set_poi, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_user
   
   def mark
     @poi = Poi.find(params[:id])
@@ -26,16 +27,17 @@ class PoisController < ApplicationController
   end
   
   def image
-    @poi = Poi.find(params[:id])
+    if !params[:keyword].nil?
+      search_image
+    end
   end
   
   def search_image
-    @poi = Poi.find(params[:id])
     # search for 5 photos
-    photos = flickr.photos.search(:text => params[:keyword], :per_page => 5)
-    @thumbnail_urls = []
+    photos = flickr.photos.search(:text => params[:keyword], :per_page => 5, :page => params[:page])
+    @flickr_photo_ids = []
     photos.each do |photo|
-      @thumbnail_urls << FlickRaw.url_q(flickr.photos.getInfo :photo_id => photo.id, :secret => photo.secret)
+      @flickr_photo_ids << photo.id
     end
     render "image"
   end
@@ -117,6 +119,6 @@ class PoisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poi_params
-      params.require(:poi).permit(:name, :location, :description, :vote, :image_url)
+      params.require(:poi).permit(:name, :location, :description, :vote, :image_url, :photo_page_url)
     end
 end

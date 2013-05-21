@@ -1,18 +1,33 @@
-<h1>Choose Image for <%= @poi.name %></h1>
-<%= form_tag image_path(@poi.id) do %>
+<h1>Choose Image</h1>
+<%= form_tag request.url do %>
 	<div class="field">
 		<%= label_tag :search_on_flickr %>
-		<%= text_field_tag :keyword, params[:keyword], :value => @poi.name %>
+		<%= text_field_tag :keyword, params[:keyword] %>
+		<%= text_field_tag :callback, params[:callback], :value => params[:callback], :class => "hidden" %>
 	</div>
 	<div class="action">
 		<%= submit_tag "Search", :class => "btn btn-primary"%>
 	</div>
-	<% if !@thumbnail_urls.nil? && !@thumbnail_urls.empty? %>
+	<% if !@flickr_photo_ids.nil? && !@flickr_photo_ids.empty? %>
 	<h3>Search Results</h3>
 	<div id="results">
-		<% @thumbnail_urls.each do |url| %>
-		<%= link_to image_tag(url), edit_poi_path + "?image_url=" + url %>
+		<% @flickr_photo_ids.each do |id| %>
+			<% info = flickr.photos.getInfo(:photo_id => id) 
+					image_url = FlickRaw.url_q(info)
+					page_url = FlickRaw.url_photopage(info) %>
+			<%= link_to image_tag(image_url), params[:callback] + "?image_url=" + image_url + "&page_url=" + page_url %>
 		<% end %>
 	</div>
+	<% path = URI::escape(request.path + "?callback=#{params[:callback]}&keyword=" + params[:keyword] + "&page=")
+		if !params[:page].nil? %>
+		<% next_page = params[:page].to_i + 1 
+			 previous_page = params[:page].to_i - 1 %>
+	<% else %>
+		<% next_page = 2 %>
+	<% end %>
+	<% if !previous_page.nil? %>
+		<%= link_to "Previous", path + previous_page.to_s, :class => "btn" %>
+	<% end %>
+	<%= link_to "Next",  path + next_page.to_s, :class => "btn btn-inverse" %>
 	<% end %>
 <% end %>

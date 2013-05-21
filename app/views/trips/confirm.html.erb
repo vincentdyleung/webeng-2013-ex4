@@ -7,7 +7,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @trip.pois.each do |poi| %>
+		<% @trip.pois.sort.reverse.each do |poi| %>
 		<tr>
 			<td><%= poi.name %></td>
 			<td><%= Vote.find_all_by_poi_id(poi.id).count %></td>

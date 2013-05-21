@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_user
   
   def confirm
     @trip = Trip.find(params[:id])
