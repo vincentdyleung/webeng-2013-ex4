@@ -41,7 +41,7 @@
 	<div class="control-group">
 		<%= f.label :participants, :class => 'control-label' %>
 		<div class="controls">
-			<% User.all.each do |user| %>
+			<% User.where("id != ?", current_user.id).each do |user| %>
 			<div>
 				<%= check_box_tag "trip[participant_ids][]", user.id, @trip.participants.include?(user) %>
 				<%= user.username %>
